@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ياسر | مصمم جرافيك</title>
+    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@300;500;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --deep-purple: #0f051a;
+            --gold: #d4af37;
+            --gold-gradient: linear-gradient(45deg, #bf953f, #fcf6ba, #aa771c);
+            --glass-glow: rgba(212, 175, 55, 0.5);
+            --silk-gold: rgba(212, 175, 55, 0.15);
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Tajawal', sans-serif; scroll-behavior: smooth; cursor: default; }
+        body { background-color: var(--deep-purple); color: white; overflow-x: hidden; min-height: 100vh; }
+
+        /* --- نظام خيوط الحرير الذهبية الزجاجية (32 خيطاً) --- */
+        .glass-silk-container {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -1; overflow: hidden;
+            background: radial-gradient(circle at center, #1a0b2e 0%, var(--deep-purple) 100%);
+        }
+        .fiber {
+            position: absolute; width: 250vw; height: 400px; background: transparent;
+            border-top: 1.5px solid var(--silk-gold);
+            border-radius: 50%;
+            filter: drop-shadow(0 0 8px var(--glass-glow));
+            animation: luxuryWave 20s infinite ease-in-out;
+        }
+        
+        .fiber:nth-child(odd) { border-top-color: rgba(212, 175, 55, 0.2); }
+        .fiber:nth-child(even) { border-top-color: rgba(252, 246, 186, 0.1); }
+        
+        /* توزيع المسارات الـ 32 */
+        .fiber:nth-child(1) { top: -15%; left: -10%; animation-duration: 12s; }
+        .fiber:nth-child(2) { top: -5%; right: -20%; animation-duration: 15s; }
+        .fiber:nth-child(3) { top: 5%; left: -30%; animation-duration: 18s; }
+        .fiber:nth-child(4) { top: 10%; right: -10%; animation-duration: 22s; }
+        .fiber:nth-child(5) { top: 15%; left: -25%; animation-duration: 14s; }
+        .fiber:nth-child(6) { top: 20%; right: -35%; animation-duration: 25s; }
+        .fiber:nth-child(7) { top: 25%; left: -5%; animation-duration: 20s; }
+        .fiber:nth-child(8) { top: 30%; right: -15%; animation-duration: 16s; }
+        .fiber:nth-child(9) { top: 35%; left: -40%; animation-duration: 19s; }
+        .fiber:nth-child(10) { top: 40%; right: -20%; animation-duration: 21s; }
+        .fiber:nth-child(11) { top: 45%; left: -15%; animation-duration: 17s; }
+        .fiber:nth-child(12) { top: 50%; right: -30%; animation-duration: 24s; }
+        .fiber:nth-child(13) { top: 55%; left: -25%; animation-duration: 13s; }
+        .fiber:nth-child(14) { top: 60%; right: -10%; animation-duration: 27s; }
+        .fiber:nth-child(15) { top: 65%; left: -35%; animation-duration: 20s; }
+        .fiber:nth-child(16) { top: 70%; right: -40%; animation-duration: 23s; }
+        .fiber:nth-child(17) { top: 75%; left: -10%; animation-duration: 15s; }
+        .fiber:nth-child(18) { top: 80%; right: -25%; animation-duration: 19s; }
+        .fiber:nth-child(19) { top: 85%; left: -20%; animation-duration: 26s; }
+        .fiber:nth-child(20) { top: 90%; right: -15%; animation-duration: 14s; }
+        .fiber:nth-child(21) { top: 95%; left: -30%; animation-duration: 22s; }
+        .fiber:nth-child(22) { top: 2%; right: -50%; animation-duration: 18s; }
+        .fiber:nth-child(23) { top: 12%; left: -10%; animation-duration: 25s; }
+        .fiber:nth-child(24) { top: 22%; right: -5%; animation-duration: 20s; }
+        .fiber:nth-child(25) { top: 32%; left: -45%; animation-duration: 16s; }
+        .fiber:nth-child(26) { top: 42%; right: -25%; animation-duration: 24s; }
+        .fiber:nth-child(27) { top: 52%; left: -15%; animation-duration: 13s; }
+        .fiber:nth-child(28) { top: 62%; right: -35%; animation-duration: 27s; }
+        .fiber:nth-child(29) { top: 72%; left: -20%; animation-duration: 21s; }
+        .fiber:nth-child(30) { top: 82%; right: -40%; animation-duration: 19s; }
+        .fiber:nth-child(31) { top: 92%; left: -5%; animation-duration: 15s; }
+        .fiber:nth-child(32) { top: -10%; right: -30%; animation-duration: 28s; }
+
+        @keyframes luxuryWave {
+            0%, 100% { transform: translateX(-15%) translateY(0) rotate(-3deg); }
+            50% { transform: translateX(15%) translateY(50px) rotate(3deg); }
+        }
+
+        /* --- الهيدر وعداد الزوار --- */
+        nav {
+            position: fixed; top: 0; width: 100%; padding: 15px 8%;
+            display: flex; justify-content: space-between; align-items: center;
+            z-index: 100; background: rgba(15, 5, 26, 0.85); backdrop-filter: blur(15px);
+            border-bottom: 1px solid rgba(212, 175, 55, 0.1);
+        }
+        .visitor-counter {
+            background: rgba(255, 255, 255, 0.05); backdrop-filter: blur(10px);
+            border: 1px solid rgba(212, 175, 55, 0.2); padding: 8px 15px;
+            border-radius: 50px; display: flex; align-items: center; gap: 10px; font-size: 0.8rem;
+        }
+        .pulse-dot { width: 8px; height: 8px; background-color: #2ecc71; border-radius: 50%; position: relative; box-shadow: 0 0 10px #2ecc71; }
+        .pulse-dot::after { content: ''; position: absolute; width: 100%; height: 100%; background-color: #2ecc71; border-radius: 50%; animation: pulse 1.5s infinite; }
+        @keyframes pulse { 0% { transform: scale(1); opacity: 1; } 100% { transform: scale(3); opacity: 0; } }
+
+        /* --- العناوين --- */
+        .section-title-container { text-align: center; margin: 60px 0 40px; position: relative; }
+        .section-title-bg {
+            position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
+            font-size: 8rem; font-weight: 800; color: rgba(255, 255, 255, 0.02);
+            white-space: nowrap; letter-spacing: 25px; z-index: -1;
+        }
+        .section-title-main { font-size: 2.8rem; font-weight: 800; background: var(--gold-gradient); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+
+        /* --- واجهة الهيرو --- */
+        .hero { height: 100vh; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; }
+        .main-logo { width: 450px; max-width: 85vw; filter: drop-shadow(0 0 45px var(--glass-glow)); animation: float 6s infinite ease-in-out; }
+        @keyframes float { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-15px); } }
+
+        /* --- الكروت --- */
+        .portfolio-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 35px; padding: 0 8% 100px; }
+        .card-link { text-decoration: none; color: inherit; cursor: pointer; }
+        .premium-card {
+            position: relative; background: rgba(255, 255, 255, 0.02);
+            border: 1px solid rgba(212, 175, 55, 0.1); border-radius: 30px;
+            backdrop-filter: blur(20px); overflow: hidden; transition: all 0.5s ease;
+        }
+        .card-link:hover .premium-card { transform: translateY(-15px); border-color: var(--gold); }
+        .play-icon { position: absolute; font-size: 4rem; color: var(--gold); opacity: 0.3; top: 50%; left: 50%; transform: translate(-50%, -50%); }
+
+        /* --- المدخلات --- */
+        .contact-input { width: 100%; padding: 15px; border-radius: 15px; border: 1px solid rgba(212,175,55,0.2); background: rgba(255,255,255,0.05); color: white; outline: none; }
+        .social-btn { display: inline-block; padding: 18px 45px; border: 1px solid var(--gold); border-radius: 50px; color: white; text-decoration: none; font-weight: 800; transition: 0.4s; cursor: pointer; }
+        .social-btn:hover { background: var(--gold-gradient); color: var(--deep-purple); box-shadow: 0 0 35px var(--gold); }
+
+        @media (max-width: 768px) { .section-title-bg { font-size: 4rem; } .main-logo { width: 280px; } }
+    </style>
+</head>
+<body>
+
+    <div class="glass-silk-container">
+        <!-- 32 خيطاً ذهبياً -->
+        <div class="fiber"></div><div class="fiber"></div><div class="fiber"></div><div class="fiber"></div>
+        <div class="fiber"></div><div class="fiber"></div><div class="fiber"></div><div class="fiber"></div>
+        <div class="fiber"></div><div class="fiber"></div><div class="fiber"></div><div class="fiber"></div>
+        <div class="fiber"></div><div class="fiber"></div><div class="fiber"></div><div class="fiber"></div>
+        <div class="fiber"></div><div class="fiber"></div><div class="fiber"></div><div class="fiber"></div>
+        <div class="fiber"></div><div class="fiber"></div><div class="fiber"></div><div class="fiber"></div>
+        <div class="fiber"></div><div class="fiber"></div><div class="fiber"></div><div class="fiber"></div>
+        <div class="fiber"></div><div class="fiber"></div><div class="fiber"></div><div class="fiber"></div>
+    </div>
+
+    <nav>
+        <div style="font-weight: 800; background: var(--gold-gradient); -webkit-background-clip: text; -webkit-text-fill-color: transparent; font-size: 1.2rem;">YASSER GRAPHIC</div>
+        <div class="visitor-counter">
+            <span class="pulse-dot"></span>
+            <span>متواجد الآن: <strong id="live-count" style="color: var(--gold);">84</strong></span>
+        </div>
+    </nav>
+
+    <section class="hero">
+        <img src="yaser-logo.png(1).png" alt="Yasser Logo" class="main-logo">
+        <h1 style="font-size: 3rem; margin: 25px 0; background: var(--gold-gradient); -webkit-background-clip: text; -webkit-text-fill-color: transparent; font-weight: 800;">وجهتك الأولى في عالم التصاميم</h1>
+        <p style="letter-spacing: 10px; opacity: 0.6; font-size: 0.8rem;">PREMIUM GRAPHIC DESIGNER</p>
+    </section>
+
+    <!-- قسم الطلب -->
+    <section id="contact" style="padding: 60px 8%;">
+        <div class="section-title-container">
+            <div class="section-title-bg">ORDER</div>
+            <h2 class="section-title-main">اطلب تصميمك الآن</h2>
+        </div>
+        <div class="premium-card" style="max-width: 700px; margin: 0 auto; padding: 50px;">
+            <div style="display: grid; gap: 20px; text-align: right;">
+                <div>
+                    <label style="display: block; margin-bottom: 8px; color: var(--gold);">الأسم الكريم</label>
+                    <input type="text" id="client_name" placeholder="أدخل اسمك هنا..." class="contact-input">
+                </div>
+                <div>
+                    <label style="display: block; margin-bottom: 8px; color: var(--gold);">نوع الخدمة</label>
+                    <select id="service_type" class="contact-input" style="background: var(--deep-purple);">
+                        <option value="هوية بصرية">هوية بصرية متكاملة</option>
+                        <option value="تصميم فيديو (مونتاج)">تصميم فيديو (مونتاج)</option>
+                        <option value="سوشيال ميديا">تصاميم سوشيال ميديا</option>
+                        <option value="شعار (لوجو)">تصميم شعار (لوجو)</option>
+                    </select>
+                </div>
+                <div>
+                    <label style="display: block; margin-bottom: 8px; color: var(--gold);">تفاصيل الطلب</label>
+                    <textarea id="project_details" rows="4" placeholder="اشرح لنا فكرتك..." class="contact-input"></textarea>
+                </div>
+                <button onclick="sendToWhatsApp()" class="social-btn">إرسال عبر واتساب</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- قسم الأعمال (تمت إعادته) -->
+    <section id="portfolio" style="padding-bottom: 100px;">
+        <div class="section-title-container">
+            <div class="section-title-bg">WORKS</div>
+            <h2 class="section-title-main">التصاميم الرائجة</h2>
+        </div>
+        <div class="portfolio-grid">
+            <a href="https://www.youtube.com/watch?v=mU_WLBcPMNI" target="_blank" class="card-link">
+                <div class="premium-card">
+                    <div style="height: 250px; background: rgba(255,255,255,0.02); display: flex; align-items: center; justify-content: center;">
+                        <span class="play-icon">▶</span>
+                    </div>
+                    <div style="padding: 30px; text-align: center;">
+                        <h3 style="color: var(--gold);">تصميم اليوم الوطني 93</h3>
+                    </div>
+                </div>
+            </a>
+            <a href="https://www.youtube.com/watch?v=O1Gq-J76m4M" target="_blank" class="card-link">
+                <div class="premium-card">
+                    <div style="height: 250px; background: rgba(255,255,255,0.02); display: flex; align-items: center; justify-content: center;">
+                        <span class="play-icon">▶</span>
+                    </div>
+                    <div style="padding: 30px; text-align: center;">
+                        <h3 style="color: var(--gold);">أفخم تصميم ليوم التأسيس</h3>
+                    </div>
+                </div>
+            </a>
+        </div>
+    </section>
+
+    <footer style="text-align: center; padding: 40px; opacity: 0.3; font-size: 0.7rem;">
+        © 2026 YASSER GRAPHIC | ALL RIGHTS RESERVED
+    </footer>
+
+    <script>
+        function updateVisitors() {
+            const countElement = document.getElementById('live-count');
+            let currentCount = parseInt(countElement.innerText);
+            const change = Math.floor(Math.random() * 7) - 3;
+            let newCount = currentCount + change;
+            if (newCount < 60) newCount = 65;
+            if (newCount > 110) newCount = 105;
+            countElement.innerText = newCount;
+        }
+        setInterval(updateVisitors, 4000);
+
+        function sendToWhatsApp() {
+            const phoneNumber = "966532852261";
+            const name = document.getElementById('client_name').value;
+            const service = document.getElementById('service_type').value;
+            const details = document.getElementById('project_details').value;
+
+            if(name.trim() === "" || details.trim() === "") {
+                alert("من فضلك، قم بتعبئة الاسم وتفاصيل الطلب");
+                return;
+            }
+
+            const message = `مرحباً أستاذ ياسر،%0aاستفسار عن طلب جديد:%0a*الأسم:* ${name}%0a*الخدمة:* ${service}%0a*التفاصيل:* ${details}`;
+            window.open(`https://wa.me/${phoneNumber}?text=${message}`, '_blank');
+        }
+    </script>
+
+</body>
+</html>
