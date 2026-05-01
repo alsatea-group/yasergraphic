@@ -14,7 +14,6 @@
             --silk-gold: rgba(212, 175, 55, 0.15);
         }
 
-        /* تحسينات عامة للأداء */
         * { 
             margin: 0; padding: 0; box-sizing: border-box; 
             font-family: 'Tajawal', sans-serif; 
@@ -30,12 +29,12 @@
             min-height: 100vh;
         }
 
-        /* --- نظام خيوط الحرير المحسن (الأداء العالي) --- */
+        /* --- نظام خيوط الحرير --- */
         .glass-silk-container {
             position: fixed; top: 0; left: 0; width: 100%; height: 100%; 
             z-index: -1; overflow: hidden;
             background: radial-gradient(circle at center, #1a0b2e 0%, var(--deep-purple) 100%);
-            contain: strict; /* عزل الطبقة برمجياً لتحسين السرعة */
+            contain: strict;
         }
 
         .fiber {
@@ -44,16 +43,10 @@
             background: transparent;
             border-top: 1px solid var(--silk-gold);
             border-radius: 50%;
-            will-change: transform; /* إخبار المتصفح بالاستعداد للأنميشن */
-            transform: translate3d(0, 0, 0); /* تفعيل GPU */
+            will-change: transform;
+            transform: translate3d(0, 0, 0);
             animation: luxuryWave 18s infinite ease-in-out;
             pointer-events: none;
-        }
-        
-        /* تقليل استهلاك الرام في الجوال */
-        @media (max-width: 768px) {
-            .fiber:nth-child(n+12) { display: none; } /* إخفاء الخيوط الزائدة في الجوال فقط */
-            .fiber { width: 250vw; opacity: 0.6; }
         }
 
         @keyframes luxuryWave {
@@ -61,14 +54,12 @@
             50% { transform: translate3d(10%, 30px, 0) rotate(2deg); }
         }
 
-        /* توزيع المسارات (تم اختصارها للأداء) */
         .fiber:nth-child(1) { top: -10%; left: -5%; animation-duration: 12s; }
         .fiber:nth-child(2) { top: 10%; right: -10%; animation-duration: 15s; }
         .fiber:nth-child(3) { top: 30%; left: -15%; animation-duration: 20s; }
         .fiber:nth-child(4) { top: 50%; right: -20%; animation-duration: 18s; }
         .fiber:nth-child(5) { top: 70%; left: -10%; animation-duration: 25s; }
         .fiber:nth-child(6) { top: 90%; right: -5%; animation-duration: 14s; }
-        .fiber:nth-child(n+7) { opacity: 0.1; border-top-style: dashed; }
 
         /* --- الهيدر --- */
         nav {
@@ -102,28 +93,42 @@
         .main-logo { width: 400px; max-width: 80vw; filter: drop-shadow(0 0 30px var(--glass-glow)); animation: float 5s infinite ease-in-out; }
         @keyframes float { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-15px); } }
 
-        /* --- الكروت والشبكة --- */
-        .portfolio-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 25px; padding: 0 8% 100px; }
+        /* --- الأزرار والمدخلات --- */
+        .contact-card { max-width: 600px; margin: 0 auto; padding: 30px; background: rgba(255, 255, 255, 0.03); border: 1px solid rgba(212, 175, 55, 0.1); border-radius: 25px; backdrop-filter: blur(15px); }
+        .contact-input { width: 100%; padding: 14px; border-radius: 12px; border: 1px solid rgba(212,175,55,0.2); background: rgba(15, 5, 26, 0.7); color: white; outline: none; margin-bottom: 15px; transition: 0.3s; }
+        .contact-input:focus { border-color: var(--gold); box-shadow: 0 0 15px rgba(212,175,55,0.1); }
+        .social-btn { width: 100%; padding: 16px; border: 1px solid var(--gold); border-radius: 50px; background: transparent; color: white; font-weight: 800; cursor: pointer; transition: 0.4s; }
+        .social-btn:hover { background: var(--gold-gradient); color: var(--deep-purple); transform: scale(1.02); }
+
+        /* --- قائمة الأعمال --- */
+        .portfolio-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 25px; padding: 0 8% 40px; }
         .card-link { text-decoration: none; color: inherit; display: block; }
         .premium-card {
             position: relative; background: rgba(255, 255, 255, 0.03);
             border: 1px solid rgba(212, 175, 55, 0.1); border-radius: 25px;
-            backdrop-filter: blur(15px); -webkit-backdrop-filter: blur(15px);
-            overflow: hidden; transition: 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-            will-change: transform;
+            backdrop-filter: blur(15px); overflow: hidden; transition: 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
         }
-        .card-link:hover .premium-card { transform: translateY(-10px); border-color: var(--gold); box-shadow: 0 10px 30px rgba(212, 175, 55, 0.1); }
-        .play-icon { font-size: 3rem; color: var(--gold); opacity: 0.5; }
+        .card-link:hover .premium-card { transform: translateY(-10px); border-color: var(--gold); }
+        .play-icon { font-size: 3rem; color: var(--gold); opacity: 0.5; transition: 0.3s; }
+        .card-link:hover .play-icon { opacity: 1; transform: scale(1.1); }
 
-        /* --- المدخلات --- */
-        .contact-input { width: 100%; padding: 14px; border-radius: 12px; border: 1px solid rgba(212,175,55,0.2); background: rgba(15, 5, 26, 0.7); color: white; outline: none; transition: 0.3s; }
-        .contact-input:focus { border-color: var(--gold); box-shadow: 0 0 15px rgba(212,175,55,0.1); }
-        
-        .social-btn { 
-            width: 100%; padding: 16px; border: 1px solid var(--gold); border-radius: 50px; 
-            background: transparent; color: white; font-weight: 800; cursor: pointer; transition: 0.4s;
+        /* --- آراء العملاء --- */
+        .testimonials-wrapper { overflow: hidden; padding: 20px 0 80px; position: relative; width: 100%; direction: ltr; }
+        .testimonials-track { display: flex; gap: 20px; width: max-content; animation: scrollReviews 60s linear infinite; }
+        .testimonials-track:hover { animation-play-state: paused; }
+        @keyframes scrollReviews { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
+
+        .testimonial-card {
+            min-width: 300px; max-width: 300px; background: rgba(255, 255, 255, 0.02);
+            border: 1px solid rgba(212, 175, 55, 0.1); border-radius: 20px;
+            padding: 25px; backdrop-filter: blur(15px); direction: rtl;
+            transition: all 0.4s ease;
         }
-        .social-btn:hover { background: var(--gold-gradient); color: var(--deep-purple); transform: scale(1.02); }
+        .testimonial-card:hover { transform: translateY(-5px) scale(1.03); border-color: var(--gold); background: rgba(212, 175, 55, 0.05); }
+        .user-icon-box { width: 40px; height: 40px; border-radius: 10px; background: rgba(212, 175, 55, 0.1); display: flex; align-items: center; justify-content: center; color: var(--gold); font-weight: 800; border: 1px solid rgba(212, 175, 55, 0.2); }
+        .client-header { display: flex; align-items: center; gap: 12px; margin-bottom: 15px; }
+        .client-name { font-size: 0.9rem; color: var(--gold); font-weight: 800; }
+        .comment { font-size: 0.8rem; line-height: 1.6; opacity: 0.8; font-weight: 300; }
 
         footer { text-align: center; padding: 40px; opacity: 0.4; font-size: 0.7rem; letter-spacing: 2px; }
     </style>
@@ -131,13 +136,6 @@
 <body>
 
     <div class="glass-silk-container">
-        <!-- الخيوط الـ 32 (تم تحسين رندر العناصر) -->
-        <div class="fiber"></div><div class="fiber"></div><div class="fiber"></div><div class="fiber"></div>
-        <div class="fiber"></div><div class="fiber"></div><div class="fiber"></div><div class="fiber"></div>
-        <div class="fiber"></div><div class="fiber"></div><div class="fiber"></div><div class="fiber"></div>
-        <div class="fiber"></div><div class="fiber"></div><div class="fiber"></div><div class="fiber"></div>
-        <div class="fiber"></div><div class="fiber"></div><div class="fiber"></div><div class="fiber"></div>
-        <div class="fiber"></div><div class="fiber"></div><div class="fiber"></div><div class="fiber"></div>
         <div class="fiber"></div><div class="fiber"></div><div class="fiber"></div><div class="fiber"></div>
         <div class="fiber"></div><div class="fiber"></div><div class="fiber"></div><div class="fiber"></div>
     </div>
@@ -156,38 +154,31 @@
         <p style="letter-spacing: clamp(5px, 2vw, 10px); opacity: 0.6; font-size: 0.7rem;">PREMIUM GRAPHIC DESIGNER</p>
     </section>
 
-    <!-- قسم الطلب -->
-    <section id="contact" style="padding: 40px 8%;">
+    <!-- (1) قسم الطلب أولاً -->
+    <section id="contact" style="padding: 40px 0;">
         <div class="section-title-container">
             <div class="section-title-bg">ORDER</div>
             <h2 class="section-title-main">اطلب تصميمك الآن</h2>
         </div>
-        <div class="premium-card" style="max-width: 600px; margin: 0 auto; padding: 30px;">
-            <div style="display: grid; gap: 20px; text-align: right;">
-                <div>
-                    <label style="display: block; margin-bottom: 8px; color: var(--gold); font-size: 0.9rem;">الأسم الكريم</label>
-                    <input type="text" id="client_name" placeholder="أدخل اسمك هنا..." class="contact-input">
-                </div>
-                <div>
-                    <label style="display: block; margin-bottom: 8px; color: var(--gold); font-size: 0.9rem;">نوع الخدمة</label>
-                    <select id="service_type" class="contact-input">
-                        <option value="هوية بصرية">هوية بصرية متكاملة</option>
-                        <option value="تصميم فيديو (مونتاج)">تصميم فيديو (مونتاج)</option>
-                        <option value="سوشيال ميديا">تصاميم سوشيال ميديا</option>
-                        <option value="شعار (لوجو)">تصميم شعار (لوجو)</option>
-                    </select>
-                </div>
-                <div>
-                    <label style="display: block; margin-bottom: 8px; color: var(--gold); font-size: 0.9rem;">تفاصيل الطلب</label>
-                    <textarea id="project_details" rows="4" placeholder="اشرح لنا فكرتك..." class="contact-input"></textarea>
-                </div>
+        <div class="contact-card">
+            <div style="display: grid; gap: 5px; text-align: right;">
+                <label style="color: var(--gold); font-size: 0.9rem;">الأسم الكريم</label>
+                <input type="text" id="client_name" placeholder="أدخل اسمك هنا..." class="contact-input">
+                <label style="color: var(--gold); font-size: 0.9rem;">نوع الخدمة</label>
+                <select id="service_type" class="contact-input">
+                    <option value="هوية بصرية">هوية بصرية متكاملة</option>
+                    <option value="مونتاج">تصميم فيديو (مونتاج)</option>
+                    <option value="لوجو">تصميم شعار (لوجو)</option>
+                </select>
+                <label style="color: var(--gold); font-size: 0.9rem;">التفاصيل</label>
+                <textarea id="project_details" rows="4" placeholder="اشرح لنا فكرتك..." class="contact-input"></textarea>
                 <button onclick="sendToWhatsApp()" class="social-btn">إرسال عبر واتساب</button>
             </div>
         </div>
     </section>
 
-    <!-- قسم الأعمال -->
-    <section id="portfolio" style="padding-bottom: 80px;">
+    <!-- (2) قسم الفيديوهات الرائجة ثانياً -->
+    <section id="portfolio">
         <div class="section-title-container">
             <div class="section-title-bg">WORKS</div>
             <h2 class="section-title-main">التصاميم الرائجة</h2>
@@ -216,39 +207,58 @@
         </div>
     </section>
 
+    <!-- (3) قسم آراء العملاء ثالثاً -->
+    <section id="reviews">
+        <div class="section-title-container">
+            <div class="section-title-bg">REVIEWS</div>
+            <h2 class="section-title-main">ثقة المبدعين</h2>
+        </div>
+        <div class="testimonials-wrapper">
+            <div class="testimonials-track" id="track">
+                <div class="testimonial-card">
+                    <div class="client-header"><div class="user-icon-box">A</div><div class="client-name">أحمد السعدي</div></div>
+                    <p class="comment">"عمل احترافي جداً، ياسر يفهم ما يدور في ذهن العميل ويحوله إلى واقع بصري مبهر."</p>
+                </div>
+                <div class="testimonial-card">
+                    <div class="client-header"><div class="user-icon-box">N</div><div class="client-name">نورة الشهري</div></div>
+                    <p class="comment">"التزام بالمواعيد ودقة في التنفيذ. الشعارات التي صممها ياسر نقلت مشروعي لمستوى آخر."</p>
+                </div>
+                <div class="testimonial-card">
+                    <div class="client-header"><div class="user-icon-box">M</div><div class="client-name">محمد بن خالد</div></div>
+                    <p class="comment">"تصميم المنيو كان عصرياً وجذاباً جداً. لمسة فنية لا توصف في كل تفصيلة."</p>
+                </div>
+                <div class="testimonial-card">
+                    <div class="client-header"><div class="user-icon-box">S</div><div class="client-name">سارة القحطاني</div></div>
+                    <p class="comment">"أفضل تجربة تصميم خضتها، ياسر شخص متعاون جداً ويهتم بكل بكسل في العمل."</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
     <footer>
         © 2026 YASSER GRAPHIC | ALL RIGHTS RESERVED
     </footer>
 
     <script>
-        // تحديث العداد بشكل سلس
+        // مضاعفة الآراء للحركة المستمرة
+        const track = document.getElementById('track');
+        track.innerHTML += track.innerHTML;
+
         function updateVisitors() {
             const countElement = document.getElementById('live-count');
             let currentCount = parseInt(countElement.innerText);
-            const change = Math.floor(Math.random() * 5) - 2;
-            let newCount = currentCount + change;
-            if (newCount < 65) newCount = 70;
-            if (newCount > 120) newCount = 110;
-            countElement.innerText = newCount;
+            countElement.innerText = currentCount + (Math.floor(Math.random() * 5) - 2);
         }
         setInterval(updateVisitors, 5000);
 
-        // وظيفة الواتساب
         function sendToWhatsApp() {
-            const phoneNumber = "966532852261";
             const name = document.getElementById('client_name').value;
             const service = document.getElementById('service_type').value;
             const details = document.getElementById('project_details').value;
-
-            if(!name.trim() || !details.trim()) {
-                alert("يا هلا بك.. يرجى كتابة الاسم والتفاصيل ليتم خدمتك.");
-                return;
-            }
-
+            if(!name || !details) return alert("يرجى تعبئة البيانات");
             const message = `مرحباً أستاذ ياسر،%0aاستفسار عن طلب جديد:%0a*الأسم:* ${name}%0a*الخدمة:* ${service}%0a*التفاصيل:* ${details}`;
-            window.open(`https://wa.me/${phoneNumber}?text=${message}`, '_blank');
+            window.open(`https://wa.me/966532852261?text=${message}`, '_blank');
         }
     </script>
-
 </body>
 </html>
